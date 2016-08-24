@@ -20,6 +20,7 @@ module.exports = function(grunt) {
         },
         options: {
           compress: true,
+          dumpLineNumbers: true,
           // LESS source map
           // To enable, set sourceMap to true and update sourceMapRootpath based on your install
           sourceMap: true,
@@ -43,25 +44,25 @@ module.exports = function(grunt) {
         }
       }
     },
-    grunticon: {
-      myIcons: {
-          files: [{
-              expand: true,
-              cwd: 'library/img',
-              src: ['*.svg', '*.png'],
-              dest: "library/img"
-          }],
-          options: {
-          }
-      }
-    },
-    version: {
-      assets: {
-        files: {
-          'functions.php': ['library/dist/css/styles.css', 'library/dist/js/scripts.min.js']
-        }
-      }
-    },
+    // grunticon: {
+    //   myIcons: {
+    //       files: [{
+    //           expand: true,
+    //           cwd: 'library/img',
+    //           src: ['*.svg', '*.png'],
+    //           dest: "library/img"
+    //       }],
+    //       options: {
+    //       }
+    //   }
+    // },
+    // version: {
+    //   assets: {
+    //     files: {
+    //       'functions.php': ['library/dist/css/styles.css', 'library/dist/js/scripts.min.js']
+    //     }
+    //   }
+    // },
     watch: {
       less: {
         files: [
@@ -105,29 +106,21 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-less');
-  grunt.loadNpmTasks('grunt-wp-assets');
-  grunt.loadNpmTasks('grunt-grunticon');
-  grunt.loadNpmTasks('grunt-svgstore');
 
   // Register tasks
   grunt.registerTask('default', [
     'clean',
     'less',
-    'uglify',
-    'grunticon',
-    'version'
+    'uglify'
   ]);
 
   grunt.registerTask('build', [
     'clean:dist',
     'less',
-    'uglify',
-    'grunticon',
-    'version'
+    'uglify'
   ]);
 
   grunt.registerTask('dev', [
-    'grunticon',
     'watch'
   ]);
 
